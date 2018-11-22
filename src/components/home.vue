@@ -100,10 +100,10 @@
   infinite-scroll-disabled="loading"
   infinite-scroll-immediate-check= "false"
   infinite-scroll-distance="0">
-			<li v-for="data in productInfo">
+			<li v-for="data in productInfo" @click="toDetail(data.ProductId)">
 				<img :src="'http://img0.gjw.com/product/'+ data.Pic" alt="">
 				<p>{{data.ProductName}}</p>
-				<span>￥{{data.ActivityMoney}}</span>
+				<span>￥{{data.ActivityMoney}}--{{data.ProductId}}</span>
 			</li>
 		</ul>
 		
@@ -151,6 +151,10 @@ export default {
 	changeparentId(id){
 		this.$router.push('/list/'+id)
 	},
+	toDetail(id){
+		//console.log(id)
+		this.$router.push('/detail/'+id)
+	},
 	loadMore(){
       console.log("到底了")
 	  Indicator.open('加载中...');
@@ -161,7 +165,7 @@ export default {
         return ;
       }
       axios.get(`/BtCApi/Home/GethomeProductByhot?seriesid=${this.$store.state.id}&pageindex=${this.current}&pagesize=20`).then(res=>{
-        //console.log(res.data);
+        console.log(res.data);
         this.productInfo = [...this.productInfo,...res.data.data] //合并数组
         Indicator.close();
         //console.log(this.productInfo)
@@ -173,7 +177,7 @@ export default {
   	axios.get("/BtCApi/Home/GetHomePageImg").then(res=>{
   		//8 27 29 
   		//this.manylist = res.data.data
-  		this.picone = res.data.data[8]
+  		this.picone = res.data.data[9]
   		this.pictwo = res.data.data[30]
   		this.picthree = res.data.data[32]
   		this.datalist.push(this.picone)
