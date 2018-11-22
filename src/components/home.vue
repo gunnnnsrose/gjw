@@ -211,7 +211,8 @@ export default {
   // 	}
   // }
 }
-
+//http://m.gjw.com/BtCApi/Item/GetProduct
+//http://m.gjw.com/BtCApi/Item/GetProduct
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
