@@ -1,7 +1,7 @@
 <template>
   <div>
     <ul>
-    	<router-link to="/home" tag="li" activeClass="active">
+    	<router-link to="/home/infoone" tag="li" activeClass="active">
     		<i class="iconfont icon-all"></i>
     		<p>首页</p>
     	</router-link>
