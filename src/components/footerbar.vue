@@ -48,6 +48,7 @@ export default {
   	justify-content:space-around;
   	text-align: center;
   	color: #666666;
+    background:white;
   	li{
   		i{
   			font-size: .18rem;
