@@ -23,43 +23,43 @@
 </div>
 <!-- 列表 换成router-link 与list页跳转-->
 <ul class="list">
-	<li >
+	<li @click="changeparentId(1)">
 		<div style="background-image: linear-gradient(#fd3b40,#ffffff)">白</div>
 		<p>白酒</p>
 	</li>
-	<li >
+	<li @click="changeparentId(2)">
 		<div style="background-image: linear-gradient(#af0ffa,#ffffff)">红</div>
 		<p>葡萄酒</p>
 	</li>
-	<li >
+	<li @click="changeparentId(4)">
 		<div style="background-image: linear-gradient(#f42c82,#ffffff)">洋</div>
 		<p>洋酒</p>
 	</li>
-	<li >
+	<li @click="changeparentId(1435)">
 		<div style="background-image: linear-gradient(#2dbb60,#ffffff)">清</div>
 		<p>清酒</p>
 	</li>
-	<li >
+	<li @click="changeparentId(1)">
 		<div style="background-image: linear-gradient(#57d347,#ffffff)">老</div>
 		<p>老酒</p>
 	</li>
-	<li >
+	<li @click="changeparentId(2)">
 		<div style="background-image: linear-gradient(#0dadf5,#ffffff)">券</div>
 		<p>领券</p>
 	</li>
-	<li >
+	<li @click="changeparentId(2)">
 		<div style="background-image: linear-gradient(#e46855,#ffffff)">惠</div>
 		<p>特卖会</p>
 	</li>
-	<li >
+	<li @click="changeparentId(5)">
 		<div style="background-image: linear-gradient(#feab15,#ffffff)">黄</div>
 		<p>黄酒</p>
 	</li>
-	<li >
+	<li @click="changeparentId(2)">
 		<div style="background-image: linear-gradient(#ef3d07,#ffffff)">藏</div>
 		<p>收藏</p>
 	</li>
-	<li >
+	<li @click="changeparentId(2)">
 		<div style="background-image: linear-gradient(#08d584,#ffffff)">新</div>
 		<p>精品</p>
 	</li>
@@ -147,6 +147,9 @@ export default {
 		})
 		this.$store.commit("getId",id);
 		this.ismew = index
+	},
+	changeparentId(id){
+		this.$router.push('/list/'+id)
 	},
 	loadMore(){
       console.log("到底了")

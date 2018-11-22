@@ -2,7 +2,7 @@
   <div class="div">
     <div class="nav clear">
       <router-link to="/class" tag="i" class="iconfont icon-back l"></router-link>
-      <span class="r">搜索</span>
+      <router-link to="/search" tag="span" class="r">搜索</router-link>
       <input type="text" class="r" placeholder="请输入商品名称">
     </div>
     <div class="sort">
@@ -35,10 +35,6 @@ export default {
     }
   },
   computed: {
-    // GoodCommmentRate(data.GoodCommment,data.SumComment) {
-    //   return data.GoodCommment/data.SumComment*100%
-    // }
-    
     // parentId() {
     //   return this.$store.state.parentId;
     // },
@@ -48,10 +44,19 @@ export default {
   },
   mounted() {
   	// console.log(this.$route.params.str);
-  	fetch(`/BtCApi/List/GetProListWhere?ParentID=${this.$store.state.parentId}&brand=${this.$store.state.brand}&strWhere=0,0,0,0,0&sort=0&PageIndex=${this.index}&PageSize=20&userID=298969`).then(res=>res.json()).then(res=>{
-	    this.datalist = res.data.Prolist;
-      console.log(this.datalist)
-  	})
+    //console.log(this.$route.params.str)
+    if(this.$route.params.str.indexOf('-') != -1){
+        //console.log('存在')
+        fetch(`/BtCApi/List/GetProListWhere?ParentID=${this.$store.state.parentId}&brand=${this.$store.state.brand}&strWhere=0,0,0,0,0&sort=0&PageIndex=${this.index}&PageSize=20&userID=298969`).then(res=>res.json()).then(res=>{
+
+        this.datalist = res.data.Prolist;
+      })
+    }else{
+      fetch(`/BtCApi/List/GetProListWhere?ParentID=${this.$route.params.str}&brand=0&strWhere=0,0,0,0,0&sort=0&PageIndex=1&PageSize=20&userID=298969`).then(res=>res.json()).then(res=>{
+        this.datalist = res.data.Prolist;
+      })
+    }
+  	
   }
 }
 </script>
