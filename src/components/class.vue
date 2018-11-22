@@ -4,7 +4,7 @@
       <input type="text" disabled placeholder="请输入商品名称">
     </div>
     <div class="types">
-      <div v-for="data in datalist" class="classes">
+      <div v-for="data in datalist" class="classes" :key="data.Url">
       	<span class="r">查看全部></span><span>{{data.TypeName}}</span>
       	<ul class="clear">
       	  <!-- <router-link to="/list/id" tag="li" v-for="info in data.TypeData" :key="info.id" class="l">
@@ -65,6 +65,7 @@ export default {
 	  	height: .4rem;
 	  	line-height: .4rem;
 	  	margin: .05rem 5%;
+	  	border: none;
 	  	border-radius: 5px;
 	  	text-indent: .16rem;
 	  	color: #ddd;
