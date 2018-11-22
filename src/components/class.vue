@@ -10,7 +10,7 @@
       	  <!-- <router-link to="/list/id" tag="li" v-for="info in data.TypeData" :key="info.id" class="l">
       		{{info.Name}}
   		  </router-link> -->
-  		  <li v-for="info in data.TypeData" @click="jump(data.PinYin,info.PinYin)" :key="info.Url" class="l">
+  		  <li v-for="info in data.TypeData" @click="jump(data.PinYin,info.PinYin,data.Url,info.Url)" :key="info.Url" class="l">
       		{{info.Name}}
   		  </li>
       	</ul>
@@ -38,7 +38,8 @@ export default {
   	})
   },
   methods: {
-  	jump(str1,str2) {
+  	jump(str1,str2,id1,id2) {
+  	  this.$store.commit("changeId",[id1,id2]);
   	  this.$router.push('/list/'+str1+'-'+str2);
   	}
   }

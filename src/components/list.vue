@@ -31,22 +31,27 @@ export default {
   data () {
     return {
       datalist: [],
-      index: 1,
-      parentId: 1,
-      brand: 1
+      index: 1
     }
-  },
-  mounted() {
-  	// console.log(this.$route.params.str);
-  	fetch(`/BtCApi/List/GetProListWhere?ParentID=${this.parentId}&brand=${this.brand}&strWhere=0,0,0,0,0&sort=0&PageIndex=${this.index}&PageSize=20&userID=298969`).then(res=>res.json()).then(res=>{
-	    this.datalist = res.data.Prolist;
-      console.log(this.datalist)
-  	})
   },
   computed: {
     // GoodCommmentRate(data.GoodCommment,data.SumComment) {
     //   return data.GoodCommment/data.SumComment*100%
     // }
+    
+    // parentId() {
+    //   return this.$store.state.parentId;
+    // },
+    // brand() {
+    //   return this.$store.state.brand;
+    // }
+  },
+  mounted() {
+  	// console.log(this.$route.params.str);
+  	fetch(`/BtCApi/List/GetProListWhere?ParentID=${this.$store.state.parentId}&brand=${this.$store.state.brand}&strWhere=0,0,0,0,0&sort=0&PageIndex=${this.index}&PageSize=20&userID=298969`).then(res=>res.json()).then(res=>{
+	    this.datalist = res.data.Prolist;
+      console.log(this.datalist)
+  	})
   }
 }
 </script>

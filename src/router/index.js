@@ -10,6 +10,7 @@ import My from "../components/my.vue"
 import Banner from "../components/banner.vue"
 import List from "../components/list.vue"
 import Detail from "../components/detail.vue"
+import Search from "../components/search.vue"
 export default new Router({
   routes: [
     {
@@ -37,12 +38,16 @@ export default new Router({
       component: Banner
     },
     {
-      path: '/list/:id',
+      path: '/list/:str',
       component: List
     },
     {
       path: '/detail/:id',
       component: Detail
+    },
+    {
+      path:  '/search',
+      component: Search
     }
   ]
 })
