@@ -13,7 +13,7 @@
                 </div>
             </div>
             <!-- 如果需要分页器 -->
-            <div class="swiper-pagination"></div>
+           <!--  <div class="swiper-pagination"></div> -->
     </div>
   </header>
 <!-- 小广告 -->
@@ -141,7 +141,7 @@ export default {
   	axios.get("/BtCApi/Home/GetHomePageImg").then(res=>{
   		//8 27 29 
   		//this.manylist = res.data.data
-  		this.picone = res.data.data[9]
+  		this.picone = res.data.data[8]
   		this.pictwo = res.data.data[30]
   		this.picthree = res.data.data[32]
   		this.datalist.push(this.picone)
@@ -304,4 +304,5 @@ header{
 	}
 
 }
+.focus{border-bottom: 1px solid red}
 </style>
