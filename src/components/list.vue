@@ -10,8 +10,12 @@
       <span>销量</span>
       <span>价格</span>
     </div>
-    <div class="cont">
-      <div v-for="data in datalist" :key="data.ID" class="one l">
+    <div class="cont clear"
+    v-infinite-scroll="loadMore"
+    infinite-scroll-disabled="loading"
+    infinite-scroll-immediate-check= "false"
+    infinite-scroll-distance="0">
+      <div v-for="data in datalist" :key="data.ID" class="one l" >
         <img :src="'http://img0.gjw.com/product/'+data.Pic" alt="">
         <p class="name">{{data.ProductName}}</p>
         <p class="price">￥{{data.APPPrice}}</p>
@@ -21,17 +25,20 @@
         </p>
       </div>
     </div>
+    <p>{{msg}}</p>
   </div>
 </template>
 
 <script>
-
+import { Indicator } from 'mint-ui';
 export default {
   name: 'list',
   data () {
     return {
       datalist: [],
-      index: 1
+      index: 1,
+      loading: false,
+      msg: '正在加载中...'
     }
   },
   computed: {
@@ -44,19 +51,69 @@ export default {
   },
   mounted() {
   	// console.log(this.$route.params.str);
-    //console.log(this.$route.params.str)
-    if(this.$route.params.str.indexOf('-') != -1){
-        //console.log('存在')
-        fetch(`/BtCApi/List/GetProListWhere?ParentID=${this.$store.state.parentId}&brand=${this.$store.state.brand}&strWhere=0,0,0,0,0&sort=0&PageIndex=${this.index}&PageSize=20&userID=298969`).then(res=>res.json()).then(res=>{
+    //console.log(this.$route.params.str);
+    Indicator.open({
+      text: '加载中...',
+      spinnerType: 'fading-circle'
+    });
+
+    if(this.$route.params.str.indexOf('-') != -1) {
+      fetch(`/BtCApi/List/GetProListWhere?ParentID=${this.$store.state.parentId}&brand=${this.$store.state.brand}&strWhere=0,0,0,0,0&sort=0&PageIndex=${this.index}&PageSize=20&userID=298969`).then(res=>res.json()).then(res=>{
+        if(res.data === null) {
+          return;
+        }
 
         this.datalist = res.data.Prolist;
       })
-    }else{
-      fetch(`/BtCApi/List/GetProListWhere?ParentID=${this.$route.params.str}&brand=0&strWhere=0,0,0,0,0&sort=0&PageIndex=1&PageSize=20&userID=298969`).then(res=>res.json()).then(res=>{
+    } else {
+      fetch(`/BtCApi/List/GetProListWhere?ParentID=${this.$route.params.str}&brand=0&strWhere=0,0,0,0,0&sort=0&PageIndex=${this.index}&PageSize=20&userID=298969`).then(res=>res.json()).then(res=>{
+        if(res.data === null) {
+          return;
+        }
+
         this.datalist = res.data.Prolist;
       })
     }
-  	
+  },
+  updated() {
+    Indicator.close();
+  },
+  methods: {
+    loadMore() {
+      console.log('到底了');
+      Indicator.open(this.msg);
+      this.index++;
+
+      if(this.index>10) {
+        this.loading = true;
+        this.msg = '到底了';
+        return;
+      }
+
+
+      if(this.$route.params.str.indexOf('-') != -1) {
+        fetch(`/BtCApi/List/GetProListWhere?ParentID=${this.$store.state.parentId}&brand=${this.$store.state.brand}&strWhere=0,0,0,0,0&sort=0&PageIndex=${this.index}&PageSize=20&userID=298969`).then(res=>res.json()).then(res=>{
+          if(res.data === null) {
+            return;
+          }
+
+          this.datalist = [...this.datalist,...res.data.Prolist];
+        })
+      } else {
+        fetch(`/BtCApi/List/GetProListWhere?ParentID=${this.$route.params.str}&brand=0&strWhere=0,0,0,0,0&sort=0&PageIndex=${this.index}&PageSize=20&userID=298969`).then(res=>res.json()).then(res=>{
+          if(res.data === null) {
+            return;
+          }
+
+          this.datalist = [...this.datalist,...res.data.Prolist];
+        })
+      }
+
+      // this.$nextTick(()=>{
+      //   Indicator.close();
+      // });
+
+    }
   }
 }
 </script>
