@@ -349,7 +349,7 @@ export default {
   			left:.09rem;
 			top:.41rem;
 			background:#f44;
-			z-index: 1;
+			/* z-index: 1; */
 			opacity: .7;
 			pointer-events:none;
 			i{	
