@@ -49,6 +49,7 @@ export default {
   	text-align: center;
   	color: #666666;
     background:white;
+    z-index: 10;
   	li{
   		i{
   			font-size: .18rem;
