@@ -4,15 +4,20 @@
   <section>
     <footerbar></footerbar>
   </section>
+  <div class="gototop">
+    <gototop></gototop>
+  </div>
   </div>
 </template>
 
 <script>
 import footerbar from "./components/footerbar.vue"
+import gototop from "./components/gototop.vue"
 export default {
   name: 'App',
   components:{
-    footerbar
+    footerbar,
+    gototop
   }
 }
 </script>
@@ -34,4 +39,5 @@ export default {
      opacity: 0;
      
    }
+   .gototop{position: fixed;bottom: .5rem;right:0;}
 </style>

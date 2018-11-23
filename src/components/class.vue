@@ -1,16 +1,16 @@
 <template>
   <div id="class">
     <div class="search">
-      <input type="text" disabled placeholder="请输入商品名称">
+      <router-link to="/search" tag="div" class="input">请输入商品名称</router-link>
     </div>
     <div class="types">
-      <div v-for="data in datalist" class="classes">
+      <div v-for="data in datalist" class="classes" :key="data.Url">
       	<span class="r">查看全部></span><span>{{data.TypeName}}</span>
       	<ul class="clear">
       	  <!-- <router-link to="/list/id" tag="li" v-for="info in data.TypeData" :key="info.id" class="l">
       		{{info.Name}}
   		  </router-link> -->
-  		  <li v-for="info in data.TypeData" @click="jump(data.PinYin,info.PinYin)" :key="info.Url" class="l">
+  		  <li v-for="info in data.TypeData" @click="jump(data.PinYin,info.PinYin,data.Url,info.Url)" :key="info.Url" class="l">
       		{{info.Name}}
   		  </li>
       	</ul>
@@ -38,7 +38,8 @@ export default {
   	})
   },
   methods: {
-  	jump(str1,str2) {
+  	jump(str1,str2,id1,id2) {
+  	  this.$store.commit("changeId",[id1,id2]);
   	  this.$router.push('/list/'+str1+'-'+str2);
   	}
   }
@@ -60,11 +61,12 @@ export default {
 	  height: .5rem;
 	  border-bottom: 1px solid #eee;
 	  background: #fff;
-	  input {
+	  .input {
 	  	width: 90%;
 	  	height: .4rem;
 	  	line-height: .4rem;
 	  	margin: .05rem 5%;
+	  	background: #eee;
 	  	border-radius: 5px;
 	  	text-indent: .16rem;
 	  	color: #ddd;
