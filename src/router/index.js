@@ -11,6 +11,8 @@ import Banner from "../components/banner.vue"
 import List from "../components/list.vue"
 import Detail from "../components/detail.vue"
 import Search from "../components/search.vue"
+import Login from "../components/login.vue"
+import Register from "../components/register.vue"
 export default new Router({
   routes: [
     {
@@ -48,6 +50,14 @@ export default new Router({
     {
       path:  '/search',
       component: Search
+    },
+    {
+      path:  '/login',
+      component: Login
+    },
+    {
+      path:  '/register',
+      component: Register
     }
   ]
 })
