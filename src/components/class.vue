@@ -1,7 +1,7 @@
 <template>
   <div id="class">
     <div class="search">
-      <input type="text" disabled placeholder="请输入商品名称">
+      <router-link to="/search" tag="div" class="input">请输入商品名称</router-link>
     </div>
     <div class="types">
       <div v-for="data in datalist" class="classes" :key="data.Url">
@@ -61,12 +61,12 @@ export default {
 	  height: .5rem;
 	  border-bottom: 1px solid #eee;
 	  background: #fff;
-	  input {
+	  .input {
 	  	width: 90%;
 	  	height: .4rem;
 	  	line-height: .4rem;
 	  	margin: .05rem 5%;
-	  	border: none;
+	  	background: #eee;
 	  	border-radius: 5px;
 	  	text-indent: .16rem;
 	  	color: #ddd;

@@ -15,7 +15,7 @@
     infinite-scroll-disabled="loading"
     infinite-scroll-immediate-check= "false"
     infinite-scroll-distance="0">
-      <div v-for="data in datalist" :key="data.ID" class="one l" >
+      <div v-for="data in datalist" :key="data.ID" class="one l" @click="jump(data.ID)">
         <img :src="'http://img0.gjw.com/product/'+data.Pic" alt="">
         <p class="name">{{data.ProductName}}</p>
         <p class="price">￥{{data.APPPrice}}</p>
@@ -25,7 +25,6 @@
         </p>
       </div>
     </div>
-    <p>{{msg}}</p>
   </div>
 </template>
 
@@ -51,7 +50,6 @@ export default {
   },
   mounted() {
   	// console.log(this.$route.params.str);
-    //console.log(this.$route.params.str);
     Indicator.open({
       text: '加载中...',
       spinnerType: 'fading-circle'
@@ -79,6 +77,9 @@ export default {
     Indicator.close();
   },
   methods: {
+    jump(id) {
+      this.$router.push('/detail/'+id);
+    },
     loadMore() {
       console.log('到底了');
       Indicator.open(this.msg);
