@@ -15,9 +15,8 @@
 
     <div class="caozuo">
       <span>忘记密码</span>
-      <span>注册</span>
+      <router-link tag="span" to="/register">注册</router-link>
     </div>
-
     <button>登陆</button>
     <button>短信验证登陆</button>
    </form>
@@ -75,6 +74,7 @@ export default {
       border-bottom: 1px #ccc solid;
       color:#666;
       text-indent: .4rem;
+      outline: none;
     }
     i:nth-of-type(1){
       position: absolute;
