@@ -6,9 +6,9 @@
     </div>
     <div class="nav" :class="isClass===1?'stop':''">
     	<ul>
-    		<li class="active">商品</li>
-    		<li>详情</li>
-    		<li>评价</li>
+    		<li :class="current===1?'active':''" @click="comedown3(1)">商品</li>
+    		<li :class="current===2?'active':''" @click="comedown2(2)">详情</li>
+    		<li :class="current===3?'active':''" @click="comedown1(3)">评价</li>
     	</ul>
     </div>
     <div class="detail">
@@ -26,23 +26,23 @@
     	<div class="info">
     		<ul>
     			<li>
-    				<p>澳大利亚 黄伟倒数 美罗红葡萄酒 750ml</p>
-    				<span>有趣 简单 易音</span>
+    				<p>{{datalist.ProductName}}</p>
+    				<span>{{datalist.Explain}}</span>
     			</li>
     			<li>
-    				<p>￥49</p>
+    				<p>￥{{datalist.APPPrice}}</p>
     				<div>降低通知</div>
     			</li>
     			<li>
     				<p>数量</p>
     				<div class="control">
-	    				<div class="del">-</div>
-	    				<div class="num">1</div>
-	    				<div class="add">+</div>
+	    				<div class="del" @click="handelClickdel()">-</div>
+	    				<input type="text" class="num" :value="num" ></input>
+	    				<div class="add" @click="handelClickadd()">+</div>
     				</div>
     			</li>
     			<li>
-    				<div>送至<p>上海市</p></div>
+    				送至<p>上海市</p>
     				<i class="iconfont icon-more"></i>
     				<span>有货</span>
     			</li>
@@ -50,6 +50,19 @@
     		</ul>
     		<div class="picture"></div>
     	</div>
+    	<div class="comment">
+    		<div class="comment-title">
+    			<p>评价(100)</p>
+    			<p>查看更多<i class="iconfont icon-more"></i></p>
+    		</div>
+    		<ul class="comment-list">
+    			<li v-for="data in commentlist">
+    				<p>{{data.Usr_NiceName}}:</p><span>{{data.Usr_LeveName}}</span>
+    				<p>{{data.Content}}</p>
+    			</li>
+    		</ul>
+    	</div>
+    	<div class="details">我真懒得做了（¯﹃¯）</div>
     </div>
     <footer>
     	<router-link tag="p" to="/home">
@@ -78,7 +91,10 @@ export default {
       isClass:0,
       scrollTop: '',
       str:'',
-      arr:[]
+      arr:[],
+      num:1,
+      commentlist:null,
+      current:1
     }
   },
   components:{
@@ -97,21 +113,42 @@ export default {
           else if(this.scrollTop<68){
           	this.isClass = 0
           }
-	}
+	},
+	handelClickadd(){
+  		return this.num++
+  	},
+  	handelClickdel(){
+  		if(this.num<=1){
+  			return this.num = 1
+  		}else{
+  			return this.num--
+  		}
+  	},
+  	comedown1(id){
+  		window.scrollTo(0,700)
+  		this.current = id
+  	},
+  	comedown2(id){
+  		window.scrollTo(0,1200)
+  		this.current = id
+  	},
+  	comedown3(id){
+  		window.scrollTo(0,0)
+  		this.current = id
+  	}
   },
   mounted(){
   	window.scrollTo(0,0);//滚动条的初始化 在最上面
   	window.addEventListener('scroll', this.handleScroll);
   	axios.post("/BtCApi/Item/GetProduct",{Id:this.$route.params.id}).then(res=>{
   		this.datalist = res.data.data
-  		console.log(res.data.data.APPIntro)
+  		//console.log(res.data.data)
 		this.str = 	res.data.data.APPIntro
 		this.arr = this.str.split('/>')//字符串截取
 		this.arr.splice(5,1)//字符串切割
 		for(var i=0;i<this.arr.length;i++){
 			this.arr[i]=this.arr[i].concat('/>')//字符串拼接
 		}
-		//console.log(this.arr)
 		/******************************/
 		//字符串操作
 		// var str= "<img src='aaa'/><img src='sss'/><img src='ddd'/><img src='ffff'/><img src='gggg'/>"
@@ -137,7 +174,10 @@ export default {
 	          });
 	      })
   	})
-	//console.log(this.$route.params.id)
+	axios.get(`/BtCApi/Item/GetComment?proid=${this.$route.params.id}&pageindex=1&pagesize=5&score=0`).then(res=>{
+		this.commentlist = res.data.data
+		//console.log(this.commentlist)
+	})
 	
   },
   destroyed(){
@@ -148,6 +188,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
+body{overflow-x:hidden;}
 .title{
   	width:100%;
   	height:.45rem;
@@ -185,30 +226,9 @@ export default {
 .stop{
 	position: fixed;top:0;left:0;z-index: 10;
 }
-/* <ul>
-    			<li>
-    				<p>澳大利亚 黄伟倒数 美罗红葡萄酒 750ml</p>
-    				<span>有趣 简单 易音</span>
-    			</li>
-    			<li>
-    				<p>￥49</p>
-    				<div>降低通知</div>
-    			</li>
-    			<li>
-    				<p>数量</p>
-    				<div class="del">-</div>
-    				<div class="num">1</div>
-    				<div class="add">+</div>
-    			</li>
-    			<li>
-    				<div>送至<p>上海市</p></div>
-    				<i class="iconfont icon-more"></i>
-    				<span>有货</span>
-    			</li>
-    			<li>提示 有无手提袋说明</li>
-    		</ul> */
+
 .detail{
-	height:30rem;
+	height:20rem;
 	.lunbo{
 		width:100%;
 		height:3.75rem;
@@ -221,7 +241,6 @@ export default {
 }
 .info{
 	width:100%;
-	height:4rem;
 	ul{
 		width:100%;
 		padding-left: .15rem;
@@ -232,7 +251,7 @@ export default {
 			height:.7rem;
 			padding-top: .18rem;
 			border-bottom: 1px solid #f2f2f2;
-			p{line-height: .12rem;}
+			p{line-height: .12rem;overflow: hidden;height:.12rem;width:100%;text-overflow:ellipsis;white-space:nowrap}
 			span{line-height: .38rem;color: #fb223e;}
 		}
 		li:nth-of-type(2){
@@ -266,14 +285,84 @@ export default {
 				justify-content:space-between;
 				margin-left: .2rem;
 				margin-top: .1rem;
+				input{outline: none;border:0;}
 				.del,.add{
 					width:.38rem;background: #f8f8f8;
 				}
-				.num{width:.38rem;border-left: 1px solid #f2f2f2;border-right: 1px solid #f2f2f2;}
+				.num{
+					width:.38rem;
+					border-left: 1px solid #f2f2f2;
+					border-right: 1px solid #f2f2f2;
+					text-align: center;
+				}
+			}
+		}
+		li:nth-of-type(4){
+			height:.95rem;
+			border-bottom: 1px solid #f2f2f2;
+			padding-top: .15rem;
+			p{position: relative;top:-.2rem;left:.3rem;}
+			i{float:right;position: relative;top:-.3rem;right:.15rem;}
+			span{position: relative;bottom:0;display: block;color:#fb223e;}			
+		}
+		li:nth-of-type(5){
+			height:.6rem;
+			line-height: .45rem;
+		}
+	}
+	.picture{
+		width:100%;
+		height:.35rem;
+		background:url(../assets/detail-banner.jpg)no-repeat;
+	}
+}
+.comment{
+	width:100%;
+	.comment-title{
+		width:100%;
+		height:.45rem;
+		 /* border-bottom: 1px solid #cccccc; */ 
+		display: flex;
+		justify-content:space-between;
+		padding:0 .15rem 0 .15rem;
+		line-height: .45rem;
+		font-size: .14rem;
+		color: #333333
+	}
+	/* <p>1350****457 :</p><span>银牌酒友</span>
+	    				<p>不错的红酒，好喝</p> */
+	.comment-list{
+		width:100%;
+		li{
+			width: 100%;
+			padding:.15rem;
+			border-top: 1px solid #f2f2f2;
+			font-size: .14rem;
+			color: #333333;
+			line-height: .25rem;
+			position: relative;
+			span{
+				display: block;
+				position: absolute;right:.15rem;top:.2rem;
+				width: .58rem;
+				height:.18rem;
+				font-size: .14rem;
+				color: white;
+				background: #ff7f00;
+				text-align: center;
+				line-height: .18rem;
+				border-radius: .04rem;
 			}
 		}
 	}
-
+}
+.details{
+	border-top: 1px solid #f2f2f2;
+	width:100%;
+	text-align: center;
+	font-size: .2rem;
+	color: hotpink;
+	height:3rem;
 }
 footer{
 	width: 100%;

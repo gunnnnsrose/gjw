@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+      <router-view></router-view>
   <section>
     <footerbar></footerbar>
   </section>
@@ -31,7 +31,7 @@ export default {
   img{display: block;}
   .clear:after{content: "";display: block;clear: both;}
   section{position: fixed;bottom: 0;width: 100%}
-  html body{height:100%;}
+  html body{height:100%;overflow-x:hidden; }
   .fade-enter-active, .fade-leave-active {
    transition: all .3s;
    }

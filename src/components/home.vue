@@ -103,7 +103,7 @@
 			<li v-for="data in productInfo" @click="toDetail(data.ProductId)">
 				<img :src="'http://img0.gjw.com/product/'+ data.Pic" alt="">
 				<p>{{data.ProductName}}</p>
-				<span>￥{{data.ActivityMoney}}--{{data.ProductId}}</span>
+				<span>￥{{data.ActivityMoney}}</span>
 			</li>
 		</ul>
 		
@@ -156,7 +156,7 @@ export default {
 		this.$router.push('/detail/'+id)
 	},
 	loadMore(){
-      console.log("到底了")
+      //console.log("到底了")
 	  Indicator.open('加载中...');
 	
       this.current++;
@@ -165,7 +165,7 @@ export default {
         return ;
       }
       axios.get(`/BtCApi/Home/GethomeProductByhot?seriesid=${this.$store.state.id}&pageindex=${this.current}&pagesize=20`).then(res=>{
-        console.log(res.data);
+        //console.log(res.data);
         this.productInfo = [...this.productInfo,...res.data.data] //合并数组
         Indicator.close();
         //console.log(this.productInfo)

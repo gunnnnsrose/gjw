@@ -81,7 +81,7 @@ export default {
       this.$router.push('/detail/'+id);
     },
     loadMore() {
-      console.log('到底了');
+      
       Indicator.open(this.msg);
       this.index++;
 
@@ -109,10 +109,6 @@ export default {
           this.datalist = [...this.datalist,...res.data.Prolist];
         })
       }
-
-      // this.$nextTick(()=>{
-      //   Indicator.close();
-      // });
 
     }
   }
@@ -193,6 +189,12 @@ export default {
         }
         .name {
           color: #666;
+          height: .4rem;
+          overflow:hidden;
+          text-overflow:ellipsis;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
         }
         .price {
           margin: .3rem auto 0 auto;
