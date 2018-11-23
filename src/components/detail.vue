@@ -188,6 +188,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
+body{overflow-x:hidden;}
 .title{
   	width:100%;
   	height:.45rem;
