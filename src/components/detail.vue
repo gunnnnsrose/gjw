@@ -142,7 +142,7 @@ export default {
   	window.addEventListener('scroll', this.handleScroll);
   	axios.post("/BtCApi/Item/GetProduct",{Id:this.$route.params.id}).then(res=>{
   		this.datalist = res.data.data
-  		console.log(res.data.data)
+  		//console.log(res.data.data)
 		this.str = 	res.data.data.APPIntro
 		this.arr = this.str.split('/>')//字符串截取
 		this.arr.splice(5,1)//字符串切割
@@ -176,7 +176,7 @@ export default {
   	})
 	axios.get(`/BtCApi/Item/GetComment?proid=${this.$route.params.id}&pageindex=1&pagesize=5&score=0`).then(res=>{
 		this.commentlist = res.data.data
-		console.log(this.commentlist)
+		//console.log(this.commentlist)
 	})
 	
   },
