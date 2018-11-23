@@ -30,7 +30,7 @@ export default {
   },
   mounted() {
   	axios.get("/BtCApi/List/GetSeriesList").then(res=>{
-  	  console.log(res.data);
+  	  // console.log(res.data);
 
   	  this.datalist = res.data.data.item_data;
   	}).catch(err=>{

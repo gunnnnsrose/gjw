@@ -34,7 +34,7 @@ export default {
   },
   methods: {
   	sou() {
-  	  console.log('sousou');
+  	  // console.log('sousou');
       var str = `<img src='http://img0.gjw.com/product/2018/0523/472d0547a9c44a4488d04dc5eabbf2e1_4.jpg'/><img src='http://img0.gjw.com/product/2016/1012/0604a1b57dfe49adb08a30ec660926ed_4.jpg'/><img src='http://img0.gjw.com/product/2016/1012/1b04fcc7370e44eb94089ed52cddb164_4.jpg'/><img src='http://img0.gjw.com/product/2016/1012/e22ddab3b6f542b19e68843b3e4da990_4.jpg'/><img src='http://img0.gjw.com/product/2016/1010/c402d9ef46b845089b7c36c1a1baa1a2_4.jpg'/>`;
         var ss = /[//]product([^']*)/g;
         var arr3 = str.match(ss);
