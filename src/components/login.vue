@@ -7,33 +7,42 @@
     	<p>账号登陆</p>
     </div>
 
-   <form action="">
-     <input type="text" placeholder="用户名/邮箱/手机">
-     <i class="iconfont icon-account"></i>
-     <input type="password" placeholder="密码">
+    <div class="form">
+      <input type="text" placeholder="用户名/邮箱/手机" v-model="username">
+      <i class="iconfont icon-account"></i>
+      <input type="password" placeholder="密码" v-model="password">
       <i class="iconfont icon-warning"></i>
 
     <div class="caozuo">
       <span>忘记密码</span>
       <router-link tag="span" to="/register">注册</router-link>
     </div>
-    <button>登陆</button>
+    <button @click="login(username,password)">登陆</button>
     <button>短信验证登陆</button>
-   </form>
+   </div>
     
 
   </div>
 </template>
 
 <script>
-
-
-
+import axios from "axios"
 export default {
   name: 'login',
   data () {
     return {
-    	
+    	username: '',
+      password: ''
+    }
+  },
+  methods: {
+    login(username,password) {
+      axios.post('/v4/login',{
+        username,
+        password
+      }).then(res=>{
+        console.log(res);
+      })
     }
   }
 }
@@ -63,7 +72,7 @@ export default {
   	}
 
   }
-  form{
+  .form{
     width:100%;
     position: relative;
     input{

@@ -15,6 +15,11 @@ module.exports = {
             target:"http://m.gjw.com",
             host:"m.gjw.com",
             changeOrigin:true
+        },
+        "/v4":{
+            target:"http://10.2.157.50:3000",
+            host:"10.2.157.50:3000",
+            changeOrigin:true
         }
     },
     //http://m.gjw.com/BtCApi/Home/GethomeProductByhot?seriesid=0&pageindex=1&pagesize=20

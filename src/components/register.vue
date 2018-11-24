@@ -4,7 +4,7 @@
     	<router-link to="/home" tag="i" class="iconfont icon-back"></router-link>
     	<p>注册</p>
     </div>
-    <form >
+    <form action="/v4/users" method="POST">
     	<div>
     		<i class="iconfont icon-account"></i>
     		<input type="text" placeholder="请输入用户名" name="username">
