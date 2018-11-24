@@ -4,14 +4,14 @@
     	<router-link to="/home" tag="i" class="iconfont icon-back"></router-link>
     	<p>注册</p>
     </div>
-    <form action="/v4/users" method="POST">
+    <div class="message">
     	<div>
     		<i class="iconfont icon-account"></i>
-    		<input type="text" placeholder="请输入用户名" name="username">
+    		<input type="text" placeholder="请输入用户名" v-model="username">
     	</div>
     	<div>
     		<i class="iconfont icon-security"></i>
-    		<input type="password" placeholder="密码" name="password">
+    		<input type="password" placeholder="密码" v-model="password">
     	</div>
     	<div>
     		<i class="iconfont icon-security"></i>
@@ -20,18 +20,34 @@
     	<div style="border:none;">
     		<input type="checkbox"> 同意《同意协议并注册》
     	</div>
-    	<input type="button" value="注册" class="btn">
-    </form>
+    	<!-- <input type="button" value="注册" class="btn"> -->
+    	<button type="submit" class="btn" @click="handelClick(username,password)">注册</button>
+    </div>
   </div>
 </template>
 
 <script>
+import axios from "axios"
 export default {
   name: 'register',
   data () {
     return {
-     
+      username:'',
+      password:''
     }
+  },
+  methods:{
+  	handelClick(username,password){
+	  axios.post("/v4/register",{
+	  	username,
+	  	password
+	  }).then(res=>{
+	  	if(res.data!==true) {
+	  	  return;
+	  	}
+		this.$router.push('/login');
+	  })
+  	}
   }
 }
 </script>
@@ -54,7 +70,7 @@ export default {
 		position: relative;left:1.4rem;
 	}
 }
-form{
+.message{
 	width:100%;
 	color: #999999;
 	input{border:none;outline: none;}
@@ -73,6 +89,7 @@ form{
 		text-align: center;
 		color: #999999;
 		margin-left: .08rem;
+		outline: none;
 	}
 }
 </style>

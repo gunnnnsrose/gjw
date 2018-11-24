@@ -7,7 +7,8 @@ const store = new Vuex.Store({
 	state:{
 		id: 0,
 		parentId: 0,
-		brand: 0
+		brand: 0,
+		title: 'my'
 	},
 	mutations:{
 		getId(state,payload){
@@ -17,6 +18,9 @@ const store = new Vuex.Store({
 		changeId(state,payload) {
 			state.parentId = payload[0];
 			state.brand = payload[1];
+		},
+		getTitle(state,payload) {
+			state.title = payload
 		}
 	}
 })

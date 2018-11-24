@@ -13,13 +13,13 @@
       <input type="password" placeholder="密码" v-model="password">
       <i class="iconfont icon-warning"></i>
 
-    <div class="caozuo">
-      <span>忘记密码</span>
-      <router-link tag="span" to="/register">注册</router-link>
+      <div class="caozuo">
+        <span>忘记密码</span>
+        <router-link tag="span" to="/register">注册</router-link>
+      </div>
+      <button @click="login(username,password)">登陆</button>
+      <button>短信验证登陆</button>
     </div>
-    <button @click="login(username,password)">登陆</button>
-    <button>短信验证登陆</button>
-   </div>
     
 
   </div>
@@ -41,7 +41,13 @@ export default {
         username,
         password
       }).then(res=>{
-        console.log(res);
+        if(res.data==='null') {
+          console.log('用户名或密码错误');
+        } else {
+          // res.data.username
+          this.$store.commit('getTitle',res.data.username);
+          this.$router.push('/home');
+        }
       })
     }
   }
