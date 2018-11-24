@@ -177,9 +177,9 @@ export default {
   	axios.get("/BtCApi/Home/GetHomePageImg").then(res=>{
   		//8 27 29 
   		//this.manylist = res.data.data
-  		this.picone = res.data.data[8]
-  		this.pictwo = res.data.data[30]
-  		this.picthree = res.data.data[32]
+  		this.picone = res.data.data[11]
+  		this.pictwo = res.data.data[33]
+  		this.picthree = res.data.data[42]
   		this.datalist.push(this.picone)
   		this.datalist.push(this.pictwo)
   		this.datalist.push(this.picthree)
