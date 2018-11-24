@@ -145,7 +145,7 @@ export default {
 			//console.log(res.data)
 			this.productInfo = res.data
 		})
-		this.$store.commit("getId",id);
+		this.$store.commit("getId",id);//this.$store.state.id = id
 		this.ismew = index
 	},
 	changeparentId(id){
