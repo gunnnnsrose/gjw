@@ -62,7 +62,9 @@
     			</li>
     		</ul>
     	</div>
-    	<div class="details">我真懒得做了（¯﹃¯）</div>
+    	<div class="details" >
+    		<photo :myphoto="str"></photo>
+    	</div>
     </div>
     <footer>
     	<router-link tag="p" to="/home">
@@ -100,6 +102,7 @@ export default {
   components:{
   	photo:{
   		template:`<div v-html="myphoto">
+  				{{myphoto}}
   		</div>`,
   		props:["myphoto"],
   	}
@@ -142,7 +145,7 @@ export default {
   	window.addEventListener('scroll', this.handleScroll);
   	axios.post("/BtCApi/Item/GetProduct",{Id:this.$route.params.id}).then(res=>{
   		this.datalist = res.data.data
-  		//console.log(res.data.data)
+  		//console.log(res.data.data.APPIntro)
 		this.str = 	res.data.data.APPIntro
 		this.arr = this.str.split('/>')//字符串截取
 		this.arr.splice(5,1)//字符串切割
@@ -357,12 +360,13 @@ body{overflow-x:hidden;}
 	}
 }
 .details{
-	border-top: 1px solid #f2f2f2;
+	/*border-top: 1px solid #f2f2f2;
 	width:100%;
 	text-align: center;
 	font-size: .2rem;
 	color: hotpink;
-	height:3rem;
+	height:3rem;*/
+	img{width:100%;}
 }
 footer{
 	width: 100%;
