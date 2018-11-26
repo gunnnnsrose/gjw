@@ -11,7 +11,7 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-         "/BtCApi":{
+        "/BtCApi":{
             target:"http://m.gjw.com",
             host:"m.gjw.com",
             changeOrigin:true
