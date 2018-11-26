@@ -8,8 +8,11 @@
   	</div>
     <div class="swiper-container">
             <div class="swiper-wrapper">
-                <div class="swiper-slide" v-for="data in datalist" :key="data.id">
-                  <img :src="data.Pic"/>
+                <div class="swiper-slide" >
+                  <img src="../assets/lunbo1.jpg" height="360" width="764"/>
+                </div>
+                <div class="swiper-slide" >
+                  <img src="../assets/lunbo2.jpg" height="360" width="764"/>
                 </div>
             </div>
             <!-- 如果需要分页器 -->
@@ -231,7 +234,7 @@ header{
   	.swiper-container {
     width: 100%;
     height: 1.78rem;
-    img{width: 100%;}
+    img{width: 100%;height:1.78rem;}
 	}
 	.search{
 		position: absolute;top: .05rem;left: .15rem;
