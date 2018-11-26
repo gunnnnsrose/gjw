@@ -4,7 +4,7 @@
   <header>
   	<div class="search">
   		<i class="iconfont icon-search"></i>	
-  		<input type="text" placeholder="请输入商品名称">
+  		<input type="text" placeholder="请输入商品名称" @focus="getBlur()">
   	</div>
     <div class="swiper-container">
             <div class="swiper-wrapper">
@@ -154,6 +154,9 @@ export default {
 	toDetail(id){
 		//console.log(id)
 		this.$router.push('/detail/'+id)
+	},
+	getBlur(){
+		this.$router.push("/search")
 	},
 	loadMore(){
       //console.log("到底了")
